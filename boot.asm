@@ -1,4 +1,4 @@
-ORG 0x0
+ORG 0x7c00 
 BITS 16
 
 _start:
@@ -8,19 +8,18 @@ _start:
 times 33 db 0       ; BPB (all zeros - who cares)
 
 start:
-    jmp 0x7c0:step_2
+    jmp 0:step_2
 
 step_2:
                     ; The following defensively sets
                     ; the segment (and SS register) 
                     ; to known values
     cli             ; Clear Interrupts
-    mov ax, 0x7c0
+    mov ax, 0x00
     mov ds, ax
     mov es, ax
-    mov ax, 0x00
     mov ss, ax
-    mov sp, 0x7c0
+    mov sp, 0x7c00
     sti             ; Enables Interrupts
 
 
