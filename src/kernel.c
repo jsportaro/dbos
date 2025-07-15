@@ -1,21 +1,16 @@
-#include "kernel.h"
+#include <kernel.h>
+#include <idt/idt.h>
+#include <support/terminal.h>
 
-static uint16_t *videoMemory = (uint16_t *)(0xb8000);
-
-static uint16_t TerminalMakeChar(char c, char color)
-{
-    return color << 8 | c;
-}
-
-static void ClearTerminal(void)
-{
-    for (uint16_t i = 0; i < VGA_HEIGHT * VGA_WIDTH; i++)
-    {
-        videoMemory[i] = TerminalMakeChar('A', 4);
-    }
-}
+#include <stdint.h>
+#include <stddef.h>
 
 void KernelMain(void)
 {
-    ClearTerminal();
+    TerminalClear();
+    KernelPrint("Database OS\n");
+
+    IDTInit();
+
+    KernelPrint("System ready...\n");
 }

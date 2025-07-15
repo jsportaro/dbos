@@ -1,11 +1,13 @@
 [BITS 32]
 global _start       ; Exports _start symbol
+
 extern KernelMain
-CODE_SEG equ 0x08
-DATA_SEG equ 0x10
+
+CODE_SEL equ 0x08
+DATA_SEL equ 0x10
 
 _start:
-    mov ax, DATA_SEG
+    mov ax, DATA_SEL
     mov ds, ax
     mov es, ax
     mov fs, ax
