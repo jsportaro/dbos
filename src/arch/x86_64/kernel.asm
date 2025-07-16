@@ -20,6 +20,8 @@ _start:
     in al, 0x92
     or al, 2
     out 0x92, al
+ 
+    mov al, 00010001b
 
     call KernelMain
     jmp $

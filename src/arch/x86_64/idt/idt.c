@@ -1,19 +1,30 @@
-#include <idt.h>
-#include <config.h>
-#include <memory.h>
-#include <../support/terminal.h>
+#include <arch/x86_64/idt/idt.h>
+#include <arch/x86_64/config.h>
+#include <arch/x86_64/pic/pic.h>
+#include <memory/memory.h>
+#include <terminal.h>
 
 struct IDTDescriptor IDTDescriptors[OS_TOTAL_INTERRUPTS];
 struct IDTRDescriptor IDTRDescriptor;
 
+extern void IDTEnableInterrupts(void);
+extern void IDTDisableInterrupts(void);
 extern void IDTLoad(struct IDTRDescriptor *ptr);
+extern void Int21h(void);
+extern void NoInterrupt(void);
 
-void IDTZero(void)
+void NoInterruptHandler(void)
 {
-    KernelPrint("Divide by zero error\n");
+    IntAck();
 }
 
-void IDTSet(int interruptNumber, void *address)
+void Int21hHandler(void)
+{
+    KernelPrint("Keyboard pressed\n");
+    IntAck();
+}
+
+static void IDTSet(int interruptNumber, void *address)
 {
     struct IDTDescriptor *descriptor = &IDTDescriptors[interruptNumber];
 
@@ -31,7 +42,13 @@ void IDTInit(void)
     IDTRDescriptor.limit = sizeof(IDTDescriptors) - 1;
     IDTRDescriptor.base = (uint32_t)IDTDescriptors;
 
-    IDTSet(0, IDTZero);
+    for (int i = 0; i < OS_TOTAL_INTERRUPTS; i++)
+    {
+        IDTSet(i, NoInterrupt);
+    }
+
+    IDTSet(0x21, Int21h);
 
     IDTLoad(&IDTRDescriptor);
+    IDTEnableInterrupts();
 }

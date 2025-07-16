@@ -4,6 +4,11 @@
         "config.h": "c",
         "idt.h": "c",
         "kernel.h": "c",
-        "terminal.h": "c"
+        "terminal.h": "c",
+        "io.h": "c",
+        "*.gitignore": "c",
+        "memory.h": "c",
+        "arch.h": "c",
+        "pic.h": "c"
     }
 }

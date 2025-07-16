@@ -1,6 +1,6 @@
+#include <arch/arch.h>
 #include <kernel.h>
-#include <idt/idt.h>
-#include <support/terminal.h>
+#include <terminal.h>
 
 #include <stdint.h>
 #include <stddef.h>
@@ -8,9 +8,10 @@
 void KernelMain(void)
 {
     TerminalClear();
-    KernelPrint("Database OS\n");
+    KernelPrint("Database OS ");
 
-    IDTInit();
+    ArchPrint();
+    ArchInit();
 
     KernelPrint("System ready...\n");
 }
