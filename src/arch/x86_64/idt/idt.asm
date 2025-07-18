@@ -23,7 +23,6 @@ IDTLoad:
     mov ebx, [ebp+8]
     lidt [ebx]
     pop ebp
-    sti
     ret
 
 Int21h:
@@ -34,7 +33,7 @@ Int21h:
     sti
     iret
 
-NoInterrupt
+NoInterrupt:
     cli
     pushad
     call NoInterruptHandler

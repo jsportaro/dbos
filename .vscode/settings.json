@@ -9,6 +9,10 @@
         "*.gitignore": "c",
         "memory.h": "c",
         "arch.h": "c",
-        "pic.h": "c"
+        "pic.h": "c",
+        "heap.h": "c",
+        "panic.h": "c",
+        "cstdint": "c",
+        "kheap.h": "c"
     }
 }
