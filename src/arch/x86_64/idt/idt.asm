@@ -3,19 +3,10 @@ section .asm
 extern Int21hHandler
 extern NoInterruptHandler
 
-global IDTEnableInterrupts
-global IDTDisableInterrupts
 global IDTLoad
 global Int21h
 global NoInterrupt
 
-IDTEnableInterrupts:
-    sti
-    ret
-
-IDTDisableInterrupts:
-    cli
-    ret
 
 IDTLoad:
     push ebp

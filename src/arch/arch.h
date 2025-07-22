@@ -4,4 +4,7 @@
 void ArchPrint(void);
 void ArchInit(void);
 
+extern void EnableInterrupts(void);
+extern void DisableInterrupts(void);
+
 #endif

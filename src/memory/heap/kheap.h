@@ -26,6 +26,7 @@
 
 void KHeapInit(void);
 void *KMalloc(size_t size);
+void *KZAlloc(size_t size);
 void KFree(void *ptr);
 
 #endif

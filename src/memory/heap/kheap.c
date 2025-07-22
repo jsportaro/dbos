@@ -1,6 +1,7 @@
 #include <panic.h>
 #include <memory/heap/heap.h>
 #include <memory/heap/kheap.h>
+#include <memory/memory.h>
 #include <terminal.h>
 
 Heap KernelHeap = {0};
@@ -25,6 +26,20 @@ void KHeapInit(void)
 void *KMalloc(size_t size)
 {
     return HeapMalloc(&KernelHeap, size);
+}
+
+void *KZAlloc(size_t size)
+{
+    void *ptr = KMalloc(size);
+
+    if (ptr == NULL)
+    {
+        return NULL;
+    }
+
+    memset(ptr, 0x00, size);
+
+    return ptr;
 }
 
 void KFree(void *ptr)

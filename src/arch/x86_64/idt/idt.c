@@ -7,8 +7,6 @@
 struct IDTDescriptor IDTDescriptors[OS_TOTAL_INTERRUPTS];
 struct IDTRDescriptor IDTRDescriptor;
 
-extern void IDTEnableInterrupts(void);
-extern void IDTDisableInterrupts(void);
 extern void IDTLoad(struct IDTRDescriptor *ptr);
 extern void Int21h(void);
 extern void NoInterrupt(void);
@@ -50,5 +48,4 @@ void IDTInit(void)
     IDTSet(0x21, Int21h);
 
     IDTLoad(&IDTRDescriptor);
-    IDTEnableInterrupts();
 }

@@ -1,5 +1,7 @@
 section .asm
 
+global EnableInterrupts
+global DisableInterrupts
 global insb
 global insw
 global outb
@@ -53,4 +55,13 @@ outw:
     ; Remember - EAX is always the return value in C
 
     pop ebp
+    ret
+
+
+EnableInterrupts:
+    sti
+    ret
+
+DisableInterrupts:
+    cli
     ret
