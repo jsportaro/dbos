@@ -5,8 +5,6 @@
 
 #include <stdbool.h>
 
-#define FAST_PTR_MOD(n, d) ((ptrdiff_t)(n) & ((d) - 1))
-
 static Result HeapValidateTable(void *ptr, void *end, size_t blockSize, HeapTable *heapTable)
 {
     Result result = SUCCESS;
@@ -121,7 +119,7 @@ void HeapMarkBlocksTaken(Heap *heap, uint32_t startBlock, uint32_t totalBlocks)
 
 Result HeapCreate(Heap *heap, void *start, void *end, HeapTable *heapTable, size_t blockSize)
 {
-    Result result = 0;
+    Result result = SUCCESS;
 
     if (!HeapValidateAlignment(start, blockSize) || !HeapValidateAlignment(end, blockSize))
     {

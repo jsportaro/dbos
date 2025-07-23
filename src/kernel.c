@@ -12,7 +12,7 @@ void KernelMain(void)
     KernelPrint("Database OS ");
 
     KHeapInit();
-
+    
     ArchPrint();
     ArchInit();
 

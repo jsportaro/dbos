@@ -4,8 +4,8 @@
 #include <memory/memory.h>
 #include <terminal.h>
 
-Heap KernelHeap = {0};
-HeapTable KernelHeapTable = {0};
+static Heap KernelHeap = {0};
+static HeapTable KernelHeapTable = {0};
 
 void KHeapInit(void)
 {
@@ -16,7 +16,7 @@ void KHeapInit(void)
     void *end = (void *)(OS_HEAP_ADDRESS + OS_HEAP_SIZE_BYTES);
     int result = HeapCreate(&KernelHeap, (void *)OS_HEAP_ADDRESS, end, &KernelHeapTable, OS_HEAP_BLOCK_SIZE);
 
-    if (result != 0)
+    if (result < 0)
     {
         KernelPrint("Failed to create heap\n");
         Panic();
@@ -34,6 +34,7 @@ void *KZAlloc(size_t size)
 
     if (ptr == NULL)
     {
+        KernelPrint("No KZAlloc\n");
         return NULL;
     }
 
