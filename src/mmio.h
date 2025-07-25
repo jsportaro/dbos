@@ -1,5 +1,5 @@
-#ifndef __OS_IO_H__
-#define __OS_IO_H__
+#ifndef __OS_MMIO_H__
+#define __OS_MMIO_H__
 
 unsigned char insb(unsigned short port);
 unsigned short insw(unsigned short port);

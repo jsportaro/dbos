@@ -1,4 +1,4 @@
-FILES = ./build/kernel.asm.o ./build/kernel.o ./build/terminal.o ./build/idt.asm.o ./build/idt.o ./build/memory.o ./build/arch.o ./build/pic.o ./build/io.asm.o ./build/heap.o ./build/kheap.o ./build/paging.o ./build/paging.asm.o
+FILES = ./build/kernel.asm.o ./build/kernel.o ./build/terminal.o ./build/idt.asm.o ./build/idt.o ./build/memory.o ./build/arch.o ./build/pic.o ./build/io.asm.o ./build/heap.o ./build/kheap.o ./build/paging.o ./build/paging.asm.o ./build/ata.o
 BINARY_SECTORS=100
 INCLUDES = -I./src
 FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops -fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function -fno-builtin -Werror -Wno-unused-label -Wno-cpp -Wno-unused-parameter -nostdlib -nostartfiles -nodefaultlibs -Wall -O0 -Iinc
@@ -46,6 +46,13 @@ all: ./bin/boot.bin ./bin/kernel.bin
 ./build/paging.o: ./src/arch/x86_64/paging/paging.c
 	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./src/arch/x86_64/paging/paging.c -o ./build/paging.o
 # x86_64 End
+
+# Drivers
+
+./build/ata.o: ./src/drivers/ata/ata.c
+	i686-elf-gcc $(INCLUDES) $(FLAGS) -std=gnu99 -c ./src/drivers/ata/ata.c -o ./build/ata.o
+
+# Drivers End
 
 # Common Begin
 ./build/kernel.o: ./src/kernel.c

@@ -15,6 +15,9 @@
         "cstdint": "c",
         "kheap.h": "c",
         "paging.h": "c",
-        "stdbool.h": "c"
+        "stdbool.h": "c",
+        "stddef.h": "c",
+        "mmio.h": "c",
+        "ata.h": "c"
     }
 }

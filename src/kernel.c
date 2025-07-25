@@ -1,3 +1,4 @@
+#include <drivers/ata/ata.h>
 #include <kernel.h>
 #include <terminal.h>
 #include <arch/arch.h>
@@ -12,7 +13,8 @@ void KernelMain(void)
     KernelPrint("Database OS ");
 
     KHeapInit();
-    
+    DiskSearchAndInit();
+
     ArchPrint();
     ArchInit();
 
