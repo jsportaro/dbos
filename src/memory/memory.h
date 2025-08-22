@@ -6,5 +6,6 @@
 #define FAST_PTR_MOD(n, d) ((ptrdiff_t)(n) & ((d) - 1))
 
 void *memset(void *ptr, int c, size_t size);
+int memcmp(void *s1, void *s2, int count);
 
 #endif
