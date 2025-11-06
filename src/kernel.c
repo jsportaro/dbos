@@ -19,7 +19,5 @@ void KernelMain(void)
     ArchPrint();
     ArchInit();
 
-    ParsePath("0:/bin/shell.bin", NULL);
-
     KernelPrint("System ready...\n");
 }

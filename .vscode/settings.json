@@ -19,6 +19,7 @@
         "stddef.h": "c",
         "mmio.h": "c",
         "ata.h": "c",
-        "string.h": "c"
+        "string.h": "c",
+        "cstdlib": "c"
     }
 }

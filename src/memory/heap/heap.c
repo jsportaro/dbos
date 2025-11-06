@@ -92,7 +92,7 @@ static void *HeapBlockToAddress(Heap *heap, uint32_t block)
 
 static uint32_t HeapAddressToBlock(Heap *heap, void *ptr)
 {
-    return (ptr - heap->startAddress) / heap->blockSize;
+    return ((int)(ptr - heap->startAddress)) / heap->blockSize;
 }
 
 void HeapMarkBlocksTaken(Heap *heap, uint32_t startBlock, uint32_t totalBlocks)
@@ -165,14 +165,7 @@ out:
 
 void HeapMarkBlocksFree(Heap *heap, uint32_t startBlock)
 {
-    HeapBlockTableEntry entry = heap->heapTable->entries[startBlock];
-
-    if ((entry & HEAP_BLOCK_IS_FIRST) == 0)
-    {
-        Panic();
-    }
-
-    for (ptrdiff_t i = startBlock; i < heap->heapTable->total; i++)
+    for (ptrdiff_t i = startBlock; i < (ptrdiff_t)heap->heapTable->total; i++)
     {
         HeapBlockTableEntry entry = heap->heapTable->entries[i];
         heap->heapTable->entries[i] = HEAP_BLOCK_TABLE_ENTRY_FREE;

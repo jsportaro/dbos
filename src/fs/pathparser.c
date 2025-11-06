@@ -84,6 +84,21 @@ static PathPart *ParsePathPart(PathPart *last, const char **path)
     return part;
 }
 
+void PathPartFree(PathRoot *root)
+{
+    PathPart *part = root->first;
+
+    while (part)
+    {
+        PathPart *next = part->next;
+        KFree((void *)part->part);
+        KFree(part);
+        part = next;
+    }
+
+    KFree(root);
+}
+
 PathRoot *ParsePath(const char *path, const char *current_directory_path)
 {
     int result = 0;
@@ -125,19 +140,4 @@ PathRoot *ParsePath(const char *path, const char *current_directory_path)
 
 out:
     return root;
-}
-
-void PathPartFree(PathRoot *root)
-{
-    PathPart *part = root->first;
-
-    while (part)
-    {
-        PathPart *next = part->next;
-        KFree((void *)part->part);
-        KFree(part);
-        part = next;
-    }
-
-    KFree(root);
 }
